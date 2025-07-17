@@ -1,3 +1,4 @@
+/* --- CONTAINER DAN HEADER --- */
 .container {
   max-width: 1200px;
   margin: 40px auto;
@@ -13,28 +14,45 @@
   font-size: 32px;
 }
 
-.section { margin-top: 40px; }
-.section-title { font-size: 22px; margin-bottom: 16px; color: #f44336; }
+/* --- SECTION DAN TITLE --- */
+.section {
+  margin-top: 40px;
+}
 
+.section-title {
+  font-size: 22px;
+  margin-bottom: 16px;
+  color: #f44336;
+}
+
+/* --- CARD GENERAL --- */
 .card {
   background: white;
   border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  padding: 32px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
+/* --- FORM INPUT STYLING --- */
 .input, .textarea {
   width: 100%;
-  margin-bottom: 14px;
   padding: 16px;
   font-size: 15px;
   border-radius: 10px;
   background: #f9f9f9;
   border: 1px solid #ddd;
+  box-sizing: border-box;
 }
 
-.textarea { height: 120px; resize: none; }
+.textarea {
+  height: 120px;
+  resize: none;
+}
 
+/* --- BUTTON --- */
 .btn {
   display: flex;
   justify-content: center;
@@ -49,53 +67,179 @@
   color: white;
 }
 
-.green-btn { background: #4CAF50; }
-.red-btn { background: #f44336; }
+.green-btn {
+  background: #4CAF50;
+}
 
+.red-btn {
+  background: #f44336;
+}
+
+.btn.submit-btn {
+  margin-top: 10px;
+  width: 100%;
+}
+
+/* --- BOOK LIST GRID --- */
 .book-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 20px;
 }
 
+/* --- BOOK CARD --- */
 .book-card {
   cursor: pointer;
   border-radius: 16px;
   overflow: hidden;
   background: white;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   transition: all 0.3s;
 }
 
 .book-card.selected {
   border: 2px solid #f44336;
-  box-shadow: 0 8px 16px rgba(244,67,54,0.3);
+  box-shadow: 0 8px 16px rgba(244, 67, 54, 0.3);
 }
 
-.book-img { width: 100%; height: 280px; object-fit: cover; }
-.book-info { padding: 16px; }
-.book-name { font-weight: bold; font-size: 18px; margin-bottom: 8px; }
-.book-year { font-size: 14px; color: #666; }
+.book-img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+}
 
-.review-container { display: flex; flex-wrap: wrap; gap: 30px; margin-top: 24px; }
-.review-list { flex: 1 1 480px; }
-.review-form { flex: 1 1 400px; }
+.book-info {
+  padding: 16px;
+}
+
+.book-name {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.book-year {
+  font-size: 14px;
+  color: #666;
+}
+
+/* --- REVIEW SECTION --- */
+.review-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 24px;
+  justify-content: space-between;
+}
+
+.review-list {
+  flex: 1 1 480px;
+  min-width: 300px;
+}
 
 .review-card {
   background: #fff8f8;
   padding: 18px;
   border-radius: 16px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
   margin-bottom: 16px;
 }
 
-.review-email { font-weight: bold; margin-bottom: 8px; font-size: 15px; }
-.review-note { margin-bottom: 10px; color: #444; font-size: 15px; }
-.review-stars { color: #FFD700; font-size: 20px; }
+.review-email {
+  font-weight: bold;
+  margin-bottom: 8px;
+  font-size: 15px;
+}
 
-.stars .star { cursor: pointer; font-size: 28px; transition: color 0.2s; }
+.review-note {
+  margin-bottom: 10px;
+  color: #444;
+  font-size: 15px;
+}
 
-.empty-text { color: gray; font-style: italic; margin: 20px 0; }
+.review-stars {
+  color: #FFD700;
+  font-size: 20px;
+}
 
-.required { color: red; }
-.error-text { color: red; font-size: 12px; margin-top: -10px; margin-bottom: 10px; }
+/* --- REVIEW FORM --- */
+.review-form {
+  flex: 1 1 400px;
+  max-width: 500px;
+  box-sizing: border-box;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.review-form .section-title {
+  font-size: 22px;
+  margin-bottom: 12px;
+  color: #333;
+  text-align: center;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.stars {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 24px;
+}
+
+.star {
+  cursor: pointer;
+  font-size: 32px;
+  transition: color 0.2s;
+}
+
+.rating-score {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* --- ERROR TEXT & EMPTY TEXT --- */
+.error-text {
+  color: red;
+  font-size: 12px;
+  margin-top: -6px;
+  margin-bottom: 6px;
+}
+
+.empty-text {
+  color: gray;
+  font-style: italic;
+  margin: 20px 0;
+}
+
+.required {
+  color: red;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+  .review-container {
+    flex-direction: column;
+  }
+
+  .review-list,
+  .review-form {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}

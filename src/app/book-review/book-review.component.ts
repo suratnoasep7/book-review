@@ -1,101 +1,72 @@
-.container {
-  max-width: 1200px;
-  margin: 40px auto;
-  font-family: Arial, sans-serif;
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-book-review',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  templateUrl: './book-review.component.html',
+  styleUrl: './book-review.component.css',
+})
+export class BookReviewComponent {
+  books = [
+    {
+      name: 'The Great Gatsby',
+      year: 1925,
+      imageUrl: 'https://placehold.co/200x280/4CAF50/FFFFFF?text=Gatsby',
+      reviews: [
+        { email: 'alice@example.com', note: 'Timeless classic!', stars: 5 },
+        { email: 'bob@example.com', note: 'Beautiful writing style.', stars: 4 },
+      ]
+    },
+    {
+      name: '1984',
+      year: 1949,
+      imageUrl: 'https://placehold.co/200x280/2196F3/FFFFFF?text=1984',
+      reviews: [
+        { email: 'charlie@example.com', note: 'Chilling but brilliant.', stars: 5 }
+      ]
+    }
+  ];
+
+  selectedBook = this.books[0];
+
+  newBook = {
+    name: '',
+    year: new Date().getFullYear(),
+    imageUrl: '',
+    reviews: [] as { email: string, note: string, stars: number }[]
+  };
+
+  review = { email: '', note: '', stars: 0 };
+  hoverStar = 0;
+
+  addBook() {
+    if (!this.newBook.name.trim() || this.newBook.year <= 0) return;
+    const book = {
+      name: this.newBook.name.trim(),
+      year: this.newBook.year,
+      imageUrl: this.newBook.imageUrl.trim() || 'https://placehold.co/200x280?text=No+Image',
+      reviews: []
+    };
+    this.books.push(book);
+    this.selectedBook = book;
+    this.newBook = { name: '', year: new Date().getFullYear(), imageUrl: '', reviews: [] };
+  }
+
+  addReview() {
+    if (!this.review.email.trim() || !this.review.note.trim() || this.review.stars === 0) return;
+    this.selectedBook.reviews.push({ ...this.review });
+    this.review = { email: '', note: '', stars: 0 };
+    this.hoverStar = 0;
+  }
+
+  onImageError(event: Event) {
+    (event.target as HTMLImageElement).src = 'https://placehold.co/200x280?text=No+Image';
+  }
+
+  isValidEmail(email: string): boolean {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
 }
-
-.header {
-  background: #f44336;
-  color: white;
-  padding: 24px;
-  border-radius: 12px;
-  text-align: center;
-  font-size: 32px;
-}
-
-.section { margin-top: 40px; }
-.section-title { font-size: 22px; margin-bottom: 16px; color: #f44336; }
-
-.card {
-  background: white;
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-}
-
-.input, .textarea {
-  width: 100%;
-  margin-bottom: 14px;
-  padding: 16px;
-  font-size: 15px;
-  border-radius: 10px;
-  background: #f9f9f9;
-  border: 1px solid #ddd;
-}
-
-.textarea { height: 120px; resize: none; }
-
-.btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  padding: 16px;
-  font-weight: bold;
-  font-size: 16px;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  color: white;
-}
-
-.green-btn { background: #4CAF50; }
-.red-btn { background: #f44336; }
-
-.book-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
-}
-
-.book-card {
-  cursor: pointer;
-  border-radius: 16px;
-  overflow: hidden;
-  background: white;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  transition: all 0.3s;
-}
-
-.book-card.selected {
-  border: 2px solid #f44336;
-  box-shadow: 0 8px 16px rgba(244,67,54,0.3);
-}
-
-.book-img { width: 100%; height: 280px; object-fit: cover; }
-.book-info { padding: 16px; }
-.book-name { font-weight: bold; font-size: 18px; margin-bottom: 8px; }
-.book-year { font-size: 14px; color: #666; }
-
-.review-container { display: flex; flex-wrap: wrap; gap: 30px; margin-top: 24px; }
-.review-list { flex: 1 1 480px; }
-.review-form { flex: 1 1 400px; }
-
-.review-card {
-  background: #fff8f8;
-  padding: 18px;
-  border-radius: 16px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-  margin-bottom: 16px;
-}
-
-.review-email { font-weight: bold; margin-bottom: 8px; font-size: 15px; }
-.review-note { margin-bottom: 10px; color: #444; font-size: 15px; }
-.review-stars { color: #FFD700; font-size: 20px; }
-
-.stars .star { cursor: pointer; font-size: 28px; transition: color 0.2s; }
-
-.empty-text { color: gray; font-style: italic; margin: 20px 0; }
-
-.required { color: red; }
-.error-text { color: red; font-size: 12px; margin-top: -10px; margin-bottom: 10px; }
